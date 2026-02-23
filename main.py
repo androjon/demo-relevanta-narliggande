@@ -123,27 +123,7 @@ def post_selected_occupation(id_occupation, mode):
         st.markdown("</div>", unsafe_allow_html=True)
 
     else:
-        similar_gyr_data = st.session_state.similar_gyr.get(id_occupation)
-        similar_gyr = similar_gyr_data["similar"]
-        similar_data = st.session_state.similar.get(id_occupation)
-        similar = similar_data["similar"]
-
-        # Skapa två kolumner för närliggande data MED info-taggar
         col1, col2 = st.columns(2)
-
-        with col2:
-            st.markdown("""
-            <h4 style='color: #2E8B57; font-size: 18px; position: relative;'>
-                Närliggande yrken GYR 
-                <span style='font-size: 11px; color: #888; cursor: help; margin-left: 4px; display: inline-block; vertical-align: super; line-height: 1; width: 12px; height: 12px; border-radius: 50%; border: 1px solid #ccc; text-align: center;' title='Närliggande yrkesbenämningar i samma SSYK4 exkluderas för ge förslag på yrkesmässig rörlighet som passar under GYR'>i</span>
-            </h4>
-            """, unsafe_allow_html=True)
-            
-            gyr_html = "<div style='font-size: 14px; line-height: 1.1; max-width: 250px;'>"
-            for item in similar_gyr[:10]:
-                gyr_html += f"<span style='color: #2E8B57; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 250px; margin-bottom: 1px;'>{item['preferred_label']}</span>"
-            gyr_html += "</div>"
-            st.markdown(gyr_html, unsafe_allow_html=True)
 
         with col1:
             st.markdown("""
@@ -152,12 +132,53 @@ def post_selected_occupation(id_occupation, mode):
                 <span style='font-size: 11px; color: #888; cursor: help; margin-left: 4px; display: inline-block; vertical-align: super; line-height: 1; width: 12px; height: 12px; border-radius: 50%; border: 1px solid #ccc; text-align: center;' title='Närliggande yrkesbenämningar baserat på annonslikhet i historiska platsannonser'>i</span>
             </h4>
             """, unsafe_allow_html=True)
-            
-            similar_html = "<div style='font-size: 14px; line-height: 1.1; max-width: 250px;'>"
-            for i, item in enumerate(similar[:10]):
-                similar_html += f"<span style='color: #8B4513; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 250px; margin-bottom: 1px;'>{item['preferred_label']}</span>"
-            similar_html += "</div>"
-            st.markdown(similar_html, unsafe_allow_html=True)
+
+        with col2:
+            st.markdown("""
+                <h4 style='color: #2E8B57; font-size: 18px; position: relative;'>
+                    Närliggande yrken GYR 
+                    <span style='font-size: 11px; color: #888; cursor: help; margin-left: 4px; display: inline-block; vertical-align: super; line-height: 1; width: 12px; height: 12px; border-radius: 50%; border: 1px solid #ccc; text-align: center;' title='Närliggande yrkesbenämningar i samma SSYK4 exkluderas för ge förslag på yrkesmässig rörlighet som passar under GYR'>i</span>
+                </h4>
+                """, unsafe_allow_html=True)
+
+        similar_data = st.session_state.similar.get(id_occupation)
+        if similar_data:
+            similar = similar_data["similar"]
+
+            with col1:                
+                similar_html = "<div style='font-size: 14px; line-height: 1.1; max-width: 250px;'>"
+                for i, item in enumerate(similar[:10]):
+                    similar_html += f"<span style='color: #8B4513; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 250px; margin-bottom: 1px;'>{item['preferred_label']}</span>"
+                similar_html += "</div>"
+                st.markdown(similar_html, unsafe_allow_html=True)
+
+        else:
+            with col1:
+                st.markdown("""
+                <p style='font-size: 14px; line-height: 1.4; margin-bottom: 10px;'>
+                    Inte tillräckligt med historiska platsannonser för att kunna göra beräkningar.</a>.
+                </p>
+                """, unsafe_allow_html=True)
+
+        similar_gyr_data = st.session_state.similar_gyr.get(id_occupation)
+        if similar_gyr_data:
+            similar_gyr = similar_gyr_data["similar"]
+
+            with col2:
+                
+                gyr_html = "<div style='font-size: 14px; line-height: 1.1; max-width: 250px;'>"
+                for item in similar_gyr[:10]:
+                    gyr_html += f"<span style='color: #2E8B57; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 250px; margin-bottom: 1px;'>{item['preferred_label']}</span>"
+                gyr_html += "</div>"
+                st.markdown(gyr_html, unsafe_allow_html=True)
+
+        else:
+            with col2:
+                st.markdown("""
+                <p style='font-size: 14px; line-height: 1.4; margin-bottom: 10px;'>
+                    Inte tillräckligt med historiska platsannonser för att kunna göra beräkningar.</a>.
+                </p>
+                """, unsafe_allow_html=True)
 
         st.markdown("---")
 
