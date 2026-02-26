@@ -37,6 +37,8 @@ def post_selected_occupation(id_occupation, mode):
         skills = st.session_state.occupation_skills.get(id_occupation)
         col1, col2, col3 = st.columns(3)
 
+        allGroupSkills = skills["group_license"] + skills["group_skills"]
+
         with col1:
             st.markdown("""
             <h4 style='color: #2E8B57; font-size: 18px; position: relative;'>
@@ -46,7 +48,7 @@ def post_selected_occupation(id_occupation, mode):
             """, unsafe_allow_html=True)
             
             skills_html = "<div style='font-size: 14px; line-height: 1.1; max-width: 200px;'>"
-            for i, skill in enumerate(skills["group_skills"]):
+            for i, skill in enumerate(allGroupSkills[:20]):
                 skills_html += f"<span style='color: #2E8B57; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; margin-bottom: 1px;'>{skill}</span>"
                 if i == 9:
                     skills_html += "<div style='height: 2px; background-color: #999; margin: 12px 0;'></div>"
