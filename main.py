@@ -43,7 +43,7 @@ def post_selected_occupation(id_occupation, mode):
             st.markdown("""
             <h4 style='color: #2E8B57; font-size: 18px; position: relative;'>
                 Utifrån SSYK 
-                <span style='font-size: 11px; color: #888; cursor: help; margin-left: 4px; display: inline-block; vertical-align: super; line-height: 1; width: 12px; height: 12px; border-radius: 50%; border: 1px solid #ccc; text-align: center;' title='Kompetensbegrepp hämtade utifrån den SSYK4-grupp som yrkesbenämningen tillhör.'>i</span>
+                <span style='font-size: 11px; color: #888; cursor: help; margin-left: 4px; display: inline-block; vertical-align: super; line-height: 1; width: 12px; height: 12px; border-radius: 50%; border: 1px solid #ccc; text-align: center;' title='Kompetensbegrepp hämtade utifrån den SSYK4-grupp som yrkesbenämningen tillhör. Först i listan återfinns alla Certifikat/licenser.'>i</span>
             </h4>
             """, unsafe_allow_html=True)
             
