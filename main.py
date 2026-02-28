@@ -89,9 +89,12 @@ def post_selected_occupation(id_occupation, mode, certificates, vocational):
             
             tax_html = "<div style='font-size: 14px; line-height: 1.1; max-width: 200px;'>"
             row_count = 0
+
+            addedSkills = []
             
             for t in skills["taxonomy"]:
                 if row_count < 20:
+                    addedSkills.append(t)
                     tax_html += f"<span style='color: #4169E1; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; margin-bottom: 1px;'>{t}</span>"
                     row_count += 1
                     if row_count == 10:
@@ -100,6 +103,7 @@ def post_selected_occupation(id_occupation, mode, certificates, vocational):
             if row_count < 20:
                 for t in skills["taxonomy_calculated"]:
                     if row_count < 20:
+                        addedSkills.append(t)
                         tax_html += f"<span style='color: #8B4513; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; margin-bottom: 1px;'>{t}</span>"
                         row_count += 1
                         if row_count == 10:
@@ -108,10 +112,11 @@ def post_selected_occupation(id_occupation, mode, certificates, vocational):
             if row_count < 20:
                 for t in allGroupSkills:
                     if row_count < 20:
-                        tax_html += f"<span style='color: #2E8B57; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; margin-bottom: 1px;'>{t}</span>"
-                        row_count += 1
-                        if row_count == 10:
-                            tax_html += "<div style='height: 2px; background-color: #999; margin: 12px 0;'></div>"
+                        if not t in addedSkills:
+                            tax_html += f"<span style='color: #2E8B57; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; margin-bottom: 1px;'>{t}</span>"
+                            row_count += 1
+                            if row_count == 10:
+                                tax_html += "<div style='height: 2px; background-color: #999; margin: 12px 0;'></div>"
             
             tax_html += "</div>"
             st.markdown(tax_html, unsafe_allow_html=True)
