@@ -235,7 +235,7 @@ def choose_occupation_name():
             help= """
 **Alla yrken** inkluderar alla yrkesbenämningar i taxonomin.
     
-**Vanliga yrken arbetslösa** innehåller de 100 yrkesbenämningar som flest arbetssökande har registrerat hos Arbetsförmedlingen (motsvarar ~70% av alla registrerade yrkesbenämningar). Namnet följs av antal arbetssökande som har registrerat yrket.
+**Vanliga yrken arbetslösa** innehåller de 100 yrkesbenämningar som flest arbetssökande har registrerat hos Arbetsförmedlingen (motsvarar ~70% av alla registrerade yrkesbenämningar). Yrkena sorteras i fallande ordning.
 
 **Vanliga yrken arbetstagare** är 44 yrkesbenämningar representativa för [SCB: 30 vanligaste yrkena](https://www.scb.se/hitta-statistik/statistik-efter-amne/arbetsmarknad/utbud-av-arbetskraft/yrkesregistret-med-yrkesstatistik/pong/tabell-och-diagram/30-vanligaste-yrkena/) (motsvarar ~40% av alla sysselsatta). Namnet följs av antal arbetstagare i aktuell SSYK4-grupp.
     """
